@@ -1,0 +1,44 @@
+<form class="row" (ngSubmit)="searchGitUser()" [formGroup]="searchuUsuarioGit">
+  <div class="input-group row">
+    <div class="input-group col-md-6"> <input placeholder="pesquise por um usuário do git" type="text"
+        class="form-control" formControlName="USUARIO">
+      <div data-toggle="tooltip" data-placement="button" title="pesquisar usuário" (click)="searchGitUser()"
+        class="input-group-append">
+        <button type="button" class="input-group-text"> <i style="font-size: 11px;color: #638ec3;"
+            class='fas fa-user search'></i></button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div *ngIf=listGitUsers class="input-group row" style="justify-content: center;">
+  <div class="input-group col-md-6"> <input #SEARCHR (keyup)="searchValue = SEARCHR.value"
+      placeholder="pesquise por um usuário do git" type="text" class="form-control">
+    <div class="input-group-append">
+      <span class="input-group-text"> <i style="font-size: 11px;color: #638ec3;"
+          class='fas fa-search search'></i></span>
+    </div>
+  </div>
+</div>
+<!-- poderia criar um componente -->
+<div *ngIf="loading" class="small-loading">
+  <img src="assets/img/small-loading.gif" alt="loading">
+</div>
+
+<div *ngIf=listGitUsers class="row" class="overflow-y" [style.height]="getSizePorcentagem(80)">
+  <ul class=" list-group m-2" *ngFor="let user of listGitUsers | pesquisarFilter: searchValue: searchUser">
+    <li class="list-group-item" routerLink="/repository/{{user.login}}/gitInfo">
+      <div class="row">
+
+        <img class="avatar" src={{user.avatar_url}} />
+
+        <div class="col-md-2 mt-2">
+          <span class="label">
+            {{user.login}}</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<app-alert #alert></app-alert>

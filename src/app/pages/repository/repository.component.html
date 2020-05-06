@@ -1,0 +1,50 @@
+<div *ngIf=listUserRepository class="row ml-1 mb">
+  <div class="input-group col-md-5 col-sm-5">
+    <input #SEARCHR (keyup)="searchValue = SEARCHR.value" placeholder="pesquise pelo repositório" type="text"
+      class="form-control">
+    <div class="input-group-append">
+      <span class="input-group-text"> <i style="font-size: 11px;color: #638ec3;"
+          class='fas fa-search search'></i></span>
+    </div>
+  </div>
+  <div class="col-md-1 col-sm-1">
+    <div class="dropdown">
+      <i data-toggle="tooltip" data-placement="top" title="Filtrar Data" Tooltip on top class="fas fa-filter filterIcon"
+        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a style="cursor: pointer;" class="dropdown-item" (click)="orderByField='crescente'">Crescente</a>
+        <a style="cursor: pointer;" class="dropdown-item" (click)="orderByField='decrescente'">Decrescente</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- poderia criar um componente -->
+<div *ngIf="loading" class="small-loading">
+  <img src="assets/img/small-loading.gif" alt="loading">
+</div>
+
+<div class="iconBack">
+  <span><i (click)="backPage()" data-toggle="tooltip" data-placement="top" title="Voltar" Tooltip on top
+      class="input-group-text" style="font-size: 14px;color: #638ec3;" class='fas fas fa-reply-all search'></i></span>
+</div>
+
+
+<div class="overflow-y" [style.height]="getSizePorcentagem(90)">
+  <div
+    *ngFor="let repository of listUserRepository | pesquisarFilter: searchValue: searchRep | sort:[orderByField,campoSort]"
+    class="row card ml-2 mr-2">
+    <a target="_blank" href="{{repository.owner.html_url+'/'+repository.name}}">
+      <div class="card-body">
+        <h5 class="card-title">{{repository.name}}</h5>
+        <p style="font-size: 12px;" class="card-subtitle mb-2 text-muted"><strong>{{repository.language}}</strong></p>
+        <p class="card-text">{{repository.description}}</p>
+        <span style="float: right;" class="card-link data-label">Ultimo update:
+          {{fatorarData(repository.updated_at)}}</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+
+<app-alert #alert></app-alert>

@@ -1,0 +1,29 @@
+<div>
+  <ul class="list-group pl-2" style="width: 99%;">
+    <li *ngFor="let user of listHank " class="row" class="list-group-item"
+      routerLink="/repository/{{user.login}}/ranking">
+      <div class="row ml-1">
+        <div>
+          <img class="avatar" src={{user.gravatar}} alt="avatar">
+        </div>
+        <div class="ml-2 mt-2">
+          {{user.name}}
+        </div>
+        <div style="margin-top: 10px;" class="ml-auto mr-3">
+          <p style="margin-bottom: 0px;font-size: 12px; color: gray;">seguidores</p>
+          <icon data-toggle="tooltip" data-placement="icon" title="seguidores" class=" filterIcon fas fa-users"></icon>
+          <span style="font-size: 13px;">{{user.followers}}</span>
+        </div>
+      </div>
+      <div><span>
+          <icon class={{user.class}}></icon>Contribuições: {{user.contributions}}
+        </span></div>
+      <icon style="color: #e86868;" class="fas fa-map-marker-alt mr-1"></icon><span>{{user.location}}</span>
+    </li>
+  </ul>
+</div>
+
+<!-- poderia criar um componente -->
+<div *ngIf="loading" class="small-loading">
+  <img src="assets/img/small-loading.gif" alt="loading">
+</div>

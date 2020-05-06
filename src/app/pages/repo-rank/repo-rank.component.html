@@ -1,0 +1,50 @@
+<form class="row" (ngSubmit)="searchGitRepository()" [formGroup]="searchRepositorioGit">
+  <div class="input-group col-md-5 col-sm-5">
+    <input placeholder="pesquise o repositório" type="text" class="form-control" formControlName="REPOSITORIO">
+    <div class="input-group-append">
+      <span class="input-group-text"> <i class='fas fa-search search'></i></span>
+    </div>
+  </div>
+  <div class="col-md-1 col-sm-1">
+    <div class="dropdown">
+      <i data-toggle="tooltip" data-placement="top" title="Filtrar Data" Tooltip on top class="fas fa-filter filterIcon"
+        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a style="cursor: pointer;" class="dropdown-item" (click)="orderByField='crescente'">Crescente</a>
+        <a style="cursor: pointer;" class="dropdown-item" (click)="orderByField='decrescente'">Decrescente</a>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<div *ngIf="loading" class="small-loading">
+  <img src="assets/img/small-loading.gif" alt="loading">
+</div>
+
+
+<div class="row" class="overflow-y" [style.height]="getSizePorcentagem(90)">
+  <ul class="list-group pl-2" style="width: 99%;">
+    <li *ngFor="let repo of listTopRepository | sort:[orderByField,campoSort]" class="row" class="list-group-item"
+      routerLink="/repository/{{repo.login}}/ranking">
+      <a target="_blank" href="{{repo.owner.html_url+'/'+repo.name}}">
+        <div class="row ml-1">
+          <div>
+            <img class="avatar" src={{repo.owner.avatar_url}} alt="avatar">
+          </div>
+          <div class="ml-2 mt-2">
+            {{repo.name}}
+          </div>
+          <div style="margin-top: 10px;" class="ml-auto mr-3">
+            <icon data-toggle="tooltip" data-placement="icon" title="seguidores" class=" starIcon fas fa-star">
+            </icon>
+            <span style="font-size: 13px;">{{repo.stargazers_count}}</span>
+          </div>
+        </div>
+        <span class="card-link data-label">Ultimo update:
+          {{fatorarData(repo.updated_at)}}</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<app-alert #alert></app-alert>
