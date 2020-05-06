@@ -1,7 +1,7 @@
 <form class="row" (ngSubmit)="searchGitUser()" [formGroup]="searchuUsuarioGit">
   <div class="input-group row">
-    <div class="input-group col-md-6"> <input placeholder="pesquise por um usuário do git" type="text"
-        class="form-control" formControlName="USUARIO">
+    <div class="input-group col-md-6"> <input placeholder="Usuário do git" type="text" class="form-control"
+        formControlName="USUARIO">
       <div data-toggle="tooltip" data-placement="button" title="pesquisar usuário" (click)="searchGitUser()"
         class="input-group-append">
         <button type="button" class="input-group-text"> <i style="font-size: 11px;color: #638ec3;"
@@ -11,9 +11,9 @@
   </div>
 </form>
 
-<div *ngIf=listGitUsers class="input-group row" style="justify-content: center;">
+<div *ngIf="listGitUsers && listGitUsers.length > 1" class="input-group row" style="justify-content: center;">
   <div class="input-group col-md-6"> <input #SEARCHR (keyup)="searchValue = SEARCHR.value"
-      placeholder="pesquise por um usuário do git" type="text" class="form-control">
+      placeholder="Filtre por um usuário do git" type="text" class="form-control">
     <div class="input-group-append">
       <span class="input-group-text"> <i style="font-size: 11px;color: #638ec3;"
           class='fas fa-search search'></i></span>

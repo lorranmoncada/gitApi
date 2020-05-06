@@ -1,4 +1,4 @@
-<div>
+<div class="overflow-y" [style.height]="getSizePorcentagem(80)">
   <ul class="list-group pl-2" style="width: 99%;">
     <li *ngFor="let user of listHank " class="row" class="list-group-item"
       routerLink="/repository/{{user.login}}/ranking">
@@ -15,10 +15,13 @@
           <span style="font-size: 13px;">{{user.followers}}</span>
         </div>
       </div>
-      <div><span>
+      <div>
+        <span>
           <icon class={{user.class}}></icon>Contribuições: {{user.contributions}}
-        </span></div>
-      <icon style="color: #e86868;" class="fas fa-map-marker-alt mr-1"></icon><span>{{user.location}}</span>
+        </span>
+      </div>
+      <icon style="color: #e86868;" class="fas fa-map-marker-alt mr-1"></icon><span>{{user.location}}</span><br>
+      <span>Organizações: {{user.organizations}}</span>
     </li>
   </ul>
 </div>

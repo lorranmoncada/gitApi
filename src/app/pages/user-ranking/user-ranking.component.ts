@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GitInfoService } from 'src/app/services/git-info/git-info.service';
 import { EClasseAlertas } from 'src/app/enuns/EClasseAlertas.enum';
+import { LayoutService } from 'src/app/helpers/layout.service';
 
 @Component({
   selector: 'app-user-ranking',
@@ -43,10 +44,12 @@ loading = false;
   verifyTheFirst(){
    const maior = this.listHank.sort(function(a, b){return b.contributions - a.contributions;})[0];
    Object.defineProperty(maior, 'class', {
-    value: 'fas fa-chess-queen mr-2 theBest'
+    value: 'fas fa-crown mr-2 theBest'
     });
   }
 
-  
+  getSizePorcentagem(porcentagem: number): any {
+    return LayoutService.getHeightScreenAreaWithPercentage(porcentagem);
+  }
 
 }
