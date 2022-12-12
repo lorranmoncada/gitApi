@@ -27,7 +27,7 @@
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
     "core-js": "^2.5.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "mydatepicker": "^2.6.6",
     "ngx-bootstrap": "^4.2.0",
     "rxjs": "~6.3.3",
